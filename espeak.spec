@@ -1,5 +1,5 @@
 %define name espeak
-%define version 1.22
+%define version 1.23
 %define release %mkrel 1
 
 %define major 1
@@ -93,5 +93,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %_includedir/%name
 %_libdir/libespeak.so
+%_libdir/libespeak.a
 
 
