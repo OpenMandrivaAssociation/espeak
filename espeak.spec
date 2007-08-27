@@ -4,6 +4,7 @@
 
 %define major 1
 %define libname %mklibname %name %major
+%define libnamedev %mklibname -d %name
 
 Summary: Text to speech synthesis engine
 Name: %{name}
@@ -40,13 +41,14 @@ synthesis method from other open source TTS engines, and sounds quite
 different. It's perhaps not as natural or "smooth", but I find the
 articulation clearer and easier to listen to for long periods.
 
-%package -n %libname-devel
+%package -n %libnamedev
 Group: Development/C++
 Summary: Text to speech library
 Requires: %libname = %version
 Provides: libespeak-devel = %version-%release
+Obsoletes: %mklibname -d %name %major
 
-%description -n %libname-devel
+%description -n %libnamedev
 eSpeak is a compact open source software speech synthesizer for
 English and other languages.
 
@@ -87,7 +89,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %_libdir/libespeak.so.%{major}*
 
-%files -n %libname-devel
+%files -n %libnamedev
 %defattr(-,root,root)
 %_includedir/%name
 %_libdir/libespeak.so
