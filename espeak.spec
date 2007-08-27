@@ -1,6 +1,6 @@
 %define name espeak
-%define version 1.28
-%define release %mkrel 2
+%define version 1.29
+%define release %mkrel 1
 
 %define major 1
 %define libname %mklibname %name %major
@@ -10,7 +10,6 @@ Name: %{name}
 Version: %{version}
 Release: %{release}
 Source0: http://downloads.sourceforge.net/espeak/%{name}-%{version}-source.tar.bz2
-Patch:espeak-1.21-mkstemp.patch
 License: GPL
 Group: Sound
 Url: http://espeak.sourceforge.net/
@@ -59,7 +58,6 @@ articulation clearer and easier to listen to for long periods.
 
 %prep
 %setup -q -n %name-%version-source
-%patch -p1 -b .mkstemp
 chmod 644 ReadMe ChangeLog *.txt
 rm -f src/portaudio.h
 
