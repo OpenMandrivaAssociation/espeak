@@ -1,5 +1,5 @@
 %define name espeak
-%define version 1.29
+%define version 1.30
 %define release %mkrel 1
 
 %define major 1
@@ -10,7 +10,7 @@ Summary: Text to speech synthesis engine
 Name: %{name}
 Version: %{version}
 Release: %{release}
-Source0: http://downloads.sourceforge.net/espeak/%{name}-%{version}-source.tar.bz2
+Source0: http://downloads.sourceforge.net/espeak/%{name}-%{version}-source.zip
 License: GPL
 Group: Sound
 Url: http://espeak.sourceforge.net/
