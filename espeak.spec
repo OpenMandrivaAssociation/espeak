@@ -1,6 +1,6 @@
 %define name espeak
-%define version 1.31
-%define release %mkrel 2
+%define version 1.36.02
+%define release %mkrel 1
 
 %define major 1
 %define libname %mklibname %name %major
@@ -15,7 +15,7 @@ License: GPL
 Group: Sound
 Url: http://espeak.sourceforge.net/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: libportaudio-devel
+BuildRequires: libportaudio0-devel
 Requires: sox
 
 %description
@@ -65,7 +65,7 @@ rm -f src/portaudio.h
 
 %build
 cd src
-make
+make 
 
 %install
 rm -rf $RPM_BUILD_ROOT
