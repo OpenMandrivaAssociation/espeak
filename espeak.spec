@@ -15,7 +15,7 @@ License: GPL
 Group: Sound
 Url: http://espeak.sourceforge.net/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: libportaudio0-devel
+BuildRequires: portaudio0-devel
 Requires: sox
 
 %description
