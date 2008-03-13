@@ -1,10 +1,14 @@
 %define name espeak
 %define version 1.36.02
-%define release %mkrel 1
+%define release %mkrel 2
 
 %define major 1
 %define libname %mklibname %name %major
 %define libnamedev %mklibname -d %name
+
+#disable autorequires on portaudio since we build with portaudio0
+%define _provides_exceptions devel(libportaudio
+
 
 Summary: Text to speech synthesis engine
 Name: %{name}
