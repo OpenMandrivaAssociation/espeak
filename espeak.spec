@@ -1,5 +1,5 @@
 %define name espeak
-%define version 1.36.02
+%define version 1.37
 %define release %mkrel 3
 
 %define major 1
@@ -19,6 +19,7 @@ Group: Sound
 Url: http://espeak.sourceforge.net/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: portaudio0-devel
+#BuildRequires: pulseaudio-devel
 Requires: sox
 
 %description
@@ -70,7 +71,10 @@ rm -f src/portaudio.h
 
 %build
 cd src
+#gw use this to build with pulseaudio support ONLY
+#make AUDIO=pulseaudio
 make 
+
 
 %install
 rm -rf $RPM_BUILD_ROOT
