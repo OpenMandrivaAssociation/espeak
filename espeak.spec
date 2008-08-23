@@ -1,6 +1,6 @@
 %define name espeak
-%define version 1.37
-%define release %mkrel 4
+%define version 1.38
+%define release %mkrel 1
 
 %define major 1
 %define libname %mklibname %name %major
@@ -14,7 +14,7 @@ Name: %{name}
 Version: %{version}
 Release: %{release}
 Source0: http://downloads.sourceforge.net/espeak/%{name}-%{version}-source.zip
-License: GPL
+License: GPLv3+
 Group: Sound
 Url: http://espeak.sourceforge.net/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
