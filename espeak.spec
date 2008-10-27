@@ -14,12 +14,12 @@ Name: %{name}
 Version: %{version}
 Release: %{release}
 Source0: http://downloads.sourceforge.net/espeak/%{name}-%{version}-source.zip
+Patch0: espeak-1.39-ldflags.patch
 License: GPLv3+
 Group: Sound
 Url: http://espeak.sourceforge.net/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: portaudio0-devel
-#BuildRequires: pulseaudio-devel
+BuildRequires: pulseaudio-devel
 Requires: sox
 
 %description
@@ -66,21 +66,20 @@ articulation clearer and easier to listen to for long periods.
 
 %prep
 %setup -q -n %name-%version-source
+%patch0 -p0
 chmod 644 ReadMe ChangeLog *.txt
-rm -f src/portaudio.h
+cp -f src/portaudio19.h src/portaudio.h
 
 %build
 cd src
 #gw use this to build with pulseaudio support ONLY
 #make AUDIO=pulseaudio
-make 
-
+make CXXFLAGS="%{optflags}" LDFLAGS="%{?ldflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
 cd src
-mkdir -p %buildroot%_datadir/%name-data
-%makeinstall BINDIR=%buildroot%_bindir INCDIR=%buildroot%_includedir/%name LIBDIR=%buildroot%_libdir DATADIR=%buildroot%_datadir/%name-data
+%makeinstall_std BINDIR=%_bindir INCDIR=%_includedir/%name LIBDIR=%_libdir DATADIR=%_datadir/%name-data LDFLAGS="%{?ldflags}"
 
 %clean
 rm -rf $RPM_BUILD_ROOT
