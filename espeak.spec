@@ -1,6 +1,6 @@
 %define name espeak
 %define version 1.39
-%define release %mkrel 2
+%define release %mkrel 3
 
 %define major 1
 %define libname %mklibname %name %major
@@ -19,8 +19,7 @@ License: GPLv3+
 Group: Sound
 Url: http://espeak.sourceforge.net/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: pulseaudio-devel
-BuildRequires: portaudio-devel
+BuildRequires: portaudio0-devel
 Requires: sox
 
 %description
@@ -52,6 +51,7 @@ Summary: Text to speech library
 Requires: %libname = %version
 Provides: libespeak-devel = %version-%release
 Obsoletes: %mklibname -d %name %major
+Requires: portaudio0-devel
 
 %description -n %libnamedev
 eSpeak is a compact open source software speech synthesizer for
@@ -67,7 +67,6 @@ articulation clearer and easier to listen to for long periods.
 %setup -q -n %name-%version-source
 %patch0 -p0
 chmod 644 ReadMe ChangeLog *.txt
-cp -f src/portaudio19.h src/portaudio.h
 
 %build
 cd src
