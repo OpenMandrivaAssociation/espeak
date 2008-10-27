@@ -67,6 +67,7 @@ articulation clearer and easier to listen to for long periods.
 %setup -q -n %name-%version-source
 %patch0 -p0
 chmod 644 ReadMe ChangeLog *.txt
+rm -f src/portaudio.h
 
 %build
 cd src
