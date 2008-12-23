@@ -1,6 +1,6 @@
 %define name espeak
-%define version 1.39
-%define release %mkrel 3
+%define version 1.40
+%define release %mkrel 1
 
 %define major 1
 %define libname %mklibname %name %major
@@ -15,6 +15,7 @@ Version: %{version}
 Release: %{release}
 Source0: http://downloads.sourceforge.net/espeak/%{name}-%{version}-source.zip
 Patch0: espeak-1.39-ldflags.patch
+Patch1: espeak-1.40-source-format-strings.patch
 License: GPLv3+
 Group: Sound
 Url: http://espeak.sourceforge.net/
@@ -66,6 +67,7 @@ articulation clearer and easier to listen to for long periods.
 %prep
 %setup -q -n %name-%version-source
 %patch0 -p0
+%patch1 -p1
 chmod 644 ReadMe ChangeLog *.txt
 rm -f src/portaudio.h
 
