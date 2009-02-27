@@ -1,6 +1,6 @@
 %define name espeak
 %define version 1.40.02
-%define release %mkrel 1
+%define release %mkrel 2
 
 %define major 1
 %define libname %mklibname %name %major
@@ -20,7 +20,7 @@ License: GPLv3+
 Group: Sound
 Url: http://espeak.sourceforge.net/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: portaudio0-devel
+BuildRequires: portaudio-devel
 Requires: sox
 
 %description
@@ -78,12 +78,12 @@ cd src
 make CXXFLAGS="%{optflags}" LDFLAGS="%{?ldflags}"
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 cd src
 %makeinstall_std BINDIR=%_bindir INCDIR=%_includedir/%name LIBDIR=%_libdir DATADIR=%_datadir/%name-data LDFLAGS="%{?ldflags}"
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %if %mdkversion < 200900
 %post -n %libname -p /sbin/ldconfig
