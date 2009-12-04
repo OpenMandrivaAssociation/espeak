@@ -1,26 +1,28 @@
 %define name espeak
 %define version 1.41.01
-%define release %mkrel 2
+%define release %mkrel 3
 
 %define major 1
 %define libname %mklibname %name %major
 %define libnamedev %mklibname -d %name
 
 #disable autorequires on portaudio since we build with portaudio0
-%define _requires_exceptions devel(libportaudio
+#define _requires_exceptions devel(libportaudio
 
 Summary: Text to speech synthesis engine
 Name: %{name}
 Version: %{version}
 Release: %{release}
 Source0: http://downloads.sourceforge.net/espeak/%{name}-%{version}-source.zip
+Source1: espeak.1
 Patch0: espeak-1.39-ldflags.patch
 Patch1: espeak-1.40-source-format-strings.patch
+Patch2: espeak-1.40.02-pulseaudio.patch
 License: GPLv3+
 Group: Sound
 Url: http://espeak.sourceforge.net/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: portaudio-devel
+#BuildRequires: portaudio-devel
 BuildRequires: pulseaudio-devel
 Requires: sox
 
@@ -69,6 +71,7 @@ articulation clearer and easier to listen to for long periods.
 %setup -q -n %name-%version-source
 %patch0 -p0
 %patch1 -p1
+%patch2 -p1
 chmod 644 ReadMe ChangeLog *.txt
 rm -f src/portaudio.h
 
@@ -76,13 +79,14 @@ rm -f src/portaudio.h
 cd src
 #gw use this to build with pulseaudio support ONLY
 #make AUDIO=pulseaudio
-make CXXFLAGS="%{optflags}" LDFLAGS="%{?ldflags}" AUDIO=pulseaudio
+make CXXFLAGS="%{optflags}" LDFLAGS="%{?ldflags}"
 
 %install
 rm -rf %{buildroot}
 cd src
 %makeinstall_std BINDIR=%_bindir INCDIR=%_includedir/%name LIBDIR=%_libdir DATADIR=%_datadir/%name-data LDFLAGS="%{?ldflags}"
 
+install -m 644 -D %SOURCE1 %buildroot%_mandir/man1/%name.1
 %clean
 rm -rf %{buildroot}
 
@@ -98,6 +102,7 @@ rm -rf %{buildroot}
 %doc ReadMe ChangeLog *.txt docs
 %_bindir/%name
 %_datadir/%name-data
+%_mandir/man1/%name.1*
 
 %files -n %libname
 %defattr(-,root,root)
