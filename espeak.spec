@@ -1,6 +1,6 @@
 %define name espeak
-%define version 1.41.01
-%define release %mkrel 3
+%define version 1.42.04
+%define release %mkrel 1
 
 %define major 1
 %define libname %mklibname %name %major
@@ -16,7 +16,6 @@ Release: %{release}
 Source0: http://downloads.sourceforge.net/espeak/%{name}-%{version}-source.zip
 Source1: espeak.1
 Patch0: espeak-1.39-ldflags.patch
-Patch1: espeak-1.40-source-format-strings.patch
 Patch2: espeak-1.40.02-pulseaudio.patch
 License: GPLv3+
 Group: Sound
@@ -70,7 +69,6 @@ articulation clearer and easier to listen to for long periods.
 %prep
 %setup -q -n %name-%version-source
 %patch0 -p0
-%patch1 -p1
 %patch2 -p1
 chmod 644 ReadMe ChangeLog *.txt
 rm -f src/portaudio.h
