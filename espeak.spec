@@ -1,5 +1,5 @@
 %define name espeak
-%define version 1.42.04
+%define version 1.43
 %define release %mkrel 1
 
 %define major 1
@@ -13,7 +13,7 @@ Summary: Text to speech synthesis engine
 Name: %{name}
 Version: %{version}
 Release: %{release}
-Source0: http://downloads.sourceforge.net/espeak/%{name}-%{version}-source.zip
+Source0: http://downloads.sourceforge.net/project/espeak/%{name}/%{name}-%{version}/%{name}-%{version}-source.zip
 Source1: espeak.1
 Patch0: espeak-1.39-ldflags.patch
 Patch2: espeak-1.40.02-pulseaudio.patch
