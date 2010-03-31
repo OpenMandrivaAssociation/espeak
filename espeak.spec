@@ -1,6 +1,6 @@
 %define name espeak
 %define version 1.43
-%define release %mkrel 1
+%define release %mkrel 2
 
 %define major 1
 %define libname %mklibname %name %major
@@ -16,12 +16,13 @@ Release: %{release}
 Source0: http://downloads.sourceforge.net/project/espeak/%{name}/%{name}-%{version}/%{name}-%{version}-source.zip
 Source1: espeak.1
 Patch0: espeak-1.39-ldflags.patch
-Patch2: espeak-1.40.02-pulseaudio.patch
+#gw from Fedora: make it work with pulseaudio enabled or disabled
+Patch2: espeak-1.42.04-runtime-detection.patch
 License: GPLv3+
 Group: Sound
 Url: http://espeak.sourceforge.net/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-#BuildRequires: portaudio-devel
+BuildRequires: portaudio-devel
 BuildRequires: pulseaudio-devel
 Requires: sox
 
@@ -75,8 +76,6 @@ rm -f src/portaudio.h
 
 %build
 cd src
-#gw use this to build with pulseaudio support ONLY
-#make AUDIO=pulseaudio
 make CXXFLAGS="%{optflags}" LDFLAGS="%{?ldflags}"
 
 %install
