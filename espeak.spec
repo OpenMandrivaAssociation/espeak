@@ -1,6 +1,6 @@
 %define name espeak
 %define version 1.43
-%define release %mkrel 2
+%define release %mkrel 3
 
 %define major 1
 %define libname %mklibname %name %major
@@ -55,7 +55,6 @@ Summary: Text to speech library
 Requires: %libname = %version
 Provides: libespeak-devel = %version-%release
 Obsoletes: %mklibname -d %name %major
-Requires: portaudio0-devel
 
 %description -n %libnamedev
 eSpeak is a compact open source software speech synthesizer for
