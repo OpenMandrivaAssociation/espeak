@@ -1,6 +1,6 @@
 %define name espeak
-%define version 1.43
-%define release %mkrel 3
+%define version 1.43.03
+%define release %mkrel 1
 
 %define major 1
 %define libname %mklibname %name %major
@@ -13,7 +13,7 @@ Summary: Text to speech synthesis engine
 Name: %{name}
 Version: %{version}
 Release: %{release}
-Source0: http://downloads.sourceforge.net/project/espeak/%{name}/%{name}-%{version}/%{name}-%{version}-source.zip
+Source0: http://downloads.sourceforge.net/project/%{name}/%{name}-%{version}/%{name}-%{version}-source.zip
 Source1: espeak.1
 Patch0: espeak-1.39-ldflags.patch
 #gw from Fedora: make it work with pulseaudio enabled or disabled
