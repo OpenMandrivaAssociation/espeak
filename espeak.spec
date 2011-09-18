@@ -1,6 +1,6 @@
 %define name espeak
-%define version 1.43.03
-%define release %mkrel 2
+%define version 1.45.05
+%define release %mkrel 1
 
 %define major 1
 %define libname %mklibname %name %major
@@ -15,9 +15,8 @@ Version: %{version}
 Release: %{release}
 Source0: http://downloads.sourceforge.net/project/%{name}/%{name}-%{version}/%{name}-%{version}-source.zip
 Source1: espeak.1
-Patch0: espeak-1.39-ldflags.patch
 #gw from Fedora: make it work with pulseaudio enabled or disabled
-Patch2: espeak-1.42.04-runtime-detection.patch
+Patch2: espeak-1.45.05-runtime-detection.patch
 License: GPLv3+
 Group: Sound
 Url: http://espeak.sourceforge.net/
@@ -68,9 +67,8 @@ articulation clearer and easier to listen to for long periods.
 
 %prep
 %setup -q -n %name-%version-source
-%patch0 -p0
 %patch2 -p1
-chmod 644 ReadMe ChangeLog *.txt
+chmod 644 ReadMe *.txt
 rm -f src/portaudio.h
 
 %build
@@ -95,7 +93,7 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-%doc ReadMe ChangeLog *.txt docs
+%doc ReadMe  *.txt docs
 %_bindir/%name
 %_datadir/%name-data
 %_mandir/man1/%name.1*
