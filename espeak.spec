@@ -1,5 +1,5 @@
 %define name espeak
-%define version 1.45.05
+%define version 1.46.01
 %define release %mkrel 1
 
 %define major 1
@@ -15,8 +15,6 @@ Version: %{version}
 Release: %{release}
 Source0: http://downloads.sourceforge.net/project/%{name}/%{name}-%{version}/%{name}-%{version}-source.zip
 Source1: espeak.1
-#gw from Fedora: make it work with pulseaudio enabled or disabled
-Patch2: espeak-1.45.05-runtime-detection.patch
 License: GPLv3+
 Group: Sound
 Url: http://espeak.sourceforge.net/
@@ -67,13 +65,12 @@ articulation clearer and easier to listen to for long periods.
 
 %prep
 %setup -q -n %name-%version-source
-%patch2 -p1
 chmod 644 ReadMe *.txt
 rm -f src/portaudio.h
 
 %build
 cd src
-make CXXFLAGS="%{optflags}" LDFLAGS="%{?ldflags}"
+make CXXFLAGS="%{optflags}" LDFLAGS="%{?ldflags}" AUDIO=runtime
 
 %install
 rm -rf %{buildroot}
@@ -83,13 +80,6 @@ cd src
 install -m 644 -D %SOURCE1 %buildroot%_mandir/man1/%name.1
 %clean
 rm -rf %{buildroot}
-
-%if %mdkversion < 200900
-%post -n %libname -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun -n %libname -p /sbin/ldconfig
-%endif
 
 %files
 %defattr(-,root,root)
