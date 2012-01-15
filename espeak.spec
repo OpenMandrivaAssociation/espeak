@@ -1,5 +1,5 @@
 %define name espeak
-%define version 1.46.01
+%define version 1.46.02
 %define release %mkrel 1
 
 %define major 1
