@@ -1,6 +1,6 @@
 %define name espeak
 %define version 1.46.02
-%define release 2
+%define release 3
 
 %define major 1
 %define libname %mklibname %{name} %major
@@ -15,7 +15,9 @@ Version: %{version}
 Release: %{release}
 Source0: http://downloads.sourceforge.net/project/%{name}/%{name}-%{version}/%{name}-%{version}-source.zip
 Source1: espeak.1
-Source2: ru_dict-46.zip
+Source2: http://espeak.sourceforge.net/data/ru_dict-46.zip
+Source3: zhy_dict-46.zip
+Source4: zh_dict-46.zip
 #Patch0: espeak-1.39-ldflags.patch
 #gw from Fedora: make it work with pulseaudio enabled or disabled
 Patch2: espeak-1.46.02-runtime-detection.patch
@@ -73,7 +75,12 @@ articulation clearer and easier to listen to for long periods.
 chmod 644 ReadMe *.txt
 rm -f src/portaudio.h
 rm -f espeak-data/ru_dict
-cp %SOURCE2 espeak-data && unzip espeak-data/ru_dict*zip
+rm -f espeak-data/zh_dict
+rm -f espeak-data/zhy_dict
+cd espeak-data
+unzip %SOURCE2
+unzip %SOURCE3
+unzip %SOURCE4
 
 %build
 cd src
