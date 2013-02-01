@@ -1,10 +1,10 @@
 %define name espeak
-%define version 1.43.03
-%define release %mkrel 4
+%define version 1.46.02
+%define release 2
 
 %define major 1
-%define libname %mklibname %name %major
-%define libnamedev %mklibname -d %name
+%define libname %mklibname %{name} %major
+%define libnamedev %mklibname -d %{name}
 
 #disable autorequires on portaudio since we build with portaudio0
 #define _requires_exceptions devel(libportaudio
@@ -15,13 +15,13 @@ Version: %{version}
 Release: %{release}
 Source0: http://downloads.sourceforge.net/project/%{name}/%{name}-%{version}/%{name}-%{version}-source.zip
 Source1: espeak.1
-Patch0: espeak-1.39-ldflags.patch
+Source2: ru_dict-46.zip
+#Patch0: espeak-1.39-ldflags.patch
 #gw from Fedora: make it work with pulseaudio enabled or disabled
-Patch2: espeak-1.42.04-runtime-detection.patch
+Patch2: espeak-1.46.02-runtime-detection.patch
 License: GPLv3+
 Group: Sound
 Url: http://espeak.sourceforge.net/
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: portaudio-devel
 BuildRequires: pulseaudio-devel
 Requires: sox
@@ -38,7 +38,7 @@ articulation clearer and easier to listen to for long periods.
 %package -n %libname
 Group: System/Libraries
 Summary: Text to speech library
-Requires: %name >= %version
+Requires: %{name} >= %{version}
 
 %description -n %libname
 eSpeak is a compact open source software speech synthesizer for
@@ -52,9 +52,9 @@ articulation clearer and easier to listen to for long periods.
 %package -n %libnamedev
 Group: Development/C++
 Summary: Text to speech library
-Requires: %libname = %version
-Provides: libespeak-devel = %version-%release
-Obsoletes: %mklibname -d %name %major
+Requires: %libname = %{version}
+Provides: libespeak-devel = %{version}-%{release}
+Obsoletes: %mklibname -d %{name} %major
 
 %description -n %libnamedev
 eSpeak is a compact open source software speech synthesizer for
@@ -67,48 +67,40 @@ articulation clearer and easier to listen to for long periods.
 
 
 %prep
-%setup -q -n %name-%version-source
-%patch0 -p0
+%setup -q -n %{name}-%{version}-source
+#%patch0 -p0
 %patch2 -p1
-chmod 644 ReadMe ChangeLog *.txt
+chmod 644 ReadMe *.txt
 rm -f src/portaudio.h
+rm -f espeak-data/ru_dict
+cp %SOURCE2 espeak-data && unzip espeak-data/ru_dict*zip
 
 %build
 cd src
 make CXXFLAGS="%{optflags}" LDFLAGS="%{?ldflags}"
 
 %install
-rm -rf %{buildroot}
 cd src
-%makeinstall_std BINDIR=%_bindir INCDIR=%_includedir/%name LIBDIR=%_libdir DATADIR=%_datadir/%name-data LDFLAGS="%{?ldflags}"
+%makeinstall_std BINDIR=%{_bindir} INCDIR=%{_includedir}/%{name} LIBDIR=%{_libdir} DATADIR=%{_datadir}/%{name}-data LDFLAGS="%{?ldflags}"
 
-install -m 644 -D %SOURCE1 %buildroot%_mandir/man1/%name.1
-%clean
-rm -rf %{buildroot}
-
-%if %mdkversion < 200900
-%post -n %libname -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun -n %libname -p /sbin/ldconfig
-%endif
+install -m 644 -D %SOURCE1 %{buildroot}%{_mandir}/man1/%{name}.1
 
 %files
 %defattr(-,root,root)
-%doc ReadMe ChangeLog *.txt docs
-%_bindir/%name
-%_datadir/%name-data
-%_mandir/man1/%name.1*
+%doc ReadMe *.txt docs
+%{_bindir}/%{name}
+%{_datadir}/%{name}-data
+%{_mandir}/man1/%{name}.1*
 
 %files -n %libname
 %defattr(-,root,root)
-%_libdir/libespeak.so.%{major}*
+%{_libdir}/libespeak.so.%{major}*
 
 %files -n %libnamedev
 %defattr(-,root,root)
-%_includedir/%name
-%_libdir/libespeak.so
-%_libdir/libespeak.a
+%{_includedir}/%{name}
+%{_libdir}/libespeak.so
+%{_libdir}/libespeak.a
 
 
 
@@ -235,7 +227,7 @@ rm -rf %{buildroot}
     - restore BuildRoot
 
   + Thierry Vignaud <tv@mandriva.org>
-    - kill re-definition of %%buildroot on Pixel's request
+    - kill re-definition of buildroot on Pixel's request
 
 * Mon Aug 27 2007 Götz Waschk <waschk@mandriva.org> 1.29-1mdv2008.0
 + Revision: 71890

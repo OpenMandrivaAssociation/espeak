@@ -1,0 +1,14 @@
+diff -ur espeak-1.46.02-source/src/Makefile espeak-1.46.02-source.new/src/Makefile
+--- espeak-1.46.02-source/src/Makefile	2011-11-23 01:46:08.000000000 +0400
++++ espeak-1.46.02-source.new/src/Makefile	2013-01-31 13:06:32.202859588 +0400
+@@ -26,8 +26,8 @@
+ MKDIR = mkdir -p
+ 
+ # 'runtime' uses pulseaudio if it is running, else uses portaudio
+-#AUDIO = runtime
+-AUDIO = portaudio
++AUDIO = runtime
++#AUDIO = portaudio
+ #AUDIO = portaudio0
+ #AUDIO = portaudio2
+ #AUDIO = pulseaudio
