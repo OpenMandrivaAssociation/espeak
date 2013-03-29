@@ -1,7 +1,3 @@
-%define name espeak
-%define version 1.46.02
-%define release 3
-
 %define major 1
 %define libname %mklibname %{name} %major
 %define libnamedev %mklibname -d %{name}
@@ -10,14 +6,15 @@
 #define _requires_exceptions devel(libportaudio
 
 Summary: Text to speech synthesis engine
-Name: %{name}
-Version: %{version}
-Release: %{release}
+Name: espeak
+Version: 1.46.02
+Release: 4
 Source0: http://downloads.sourceforge.net/project/%{name}/%{name}-%{version}/%{name}-%{version}-source.zip
 Source1: espeak.1
 Source2: http://espeak.sourceforge.net/data/ru_dict-46.zip
 Source3: zhy_dict-46.zip
 Source4: zh_dict-46.zip
+Source5: espeak.rpmlintrc
 #Patch0: espeak-1.39-ldflags.patch
 #gw from Fedora: make it work with pulseaudio enabled or disabled
 Patch2: espeak-1.46.02-runtime-detection.patch
