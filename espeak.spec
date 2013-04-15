@@ -67,8 +67,10 @@ cd src
 
 %install
 %makeinstall_std -C src \
-	BINDIR=%{_bindir} INCDIR=%{_includedir}/%{name}src \
-	LIBDIR=%{_libdir} DATADIR=%{_datadir}/%{name}-data \
+	BINDIR=%{_bindir} \
+	INCDIR=%{_includedir}/%{name}src \
+	LIBDIR=%{_libdir} \
+	DATADIR=%{_datadir}/%{name}-data \
 	LDFLAGS="%{?ldflags}"
 
 install -m 644 -D %{SOURCE1} %{buildroot}%{_mandir}/man1/%{name}.1
