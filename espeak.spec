@@ -1,6 +1,7 @@
 %define major	1
 %define libname	%mklibname %{name} %major
 %define devname	%mklibname -d %{name}
+%define	debug_package	%nil
 
 Summary:	Text to speech synthesis engine
 Name:		espeak
@@ -86,6 +87,6 @@ rm -f %{buildroot}/%{_libdir}/libespeak.a
 %{_libdir}/libespeak.so.%{major}*
 
 %files -n %{devname}
-%{_includedir}/%{name}
+%{_includedir}/%{name}src
 %{_libdir}/libespeak.so
 
