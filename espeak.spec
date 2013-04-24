@@ -5,7 +5,7 @@
 
 Summary:	Text to speech synthesis engine
 Name:		espeak
-Version:	1.46.02
+Version:	1.47.07
 Release:	5
 License:	GPLv3+
 Group:		Sound
@@ -76,6 +76,8 @@ cd src
 
 install -m 644 -D %{SOURCE1} %{buildroot}%{_mandir}/man1/%{name}.1
 rm -f %{buildroot}/%{_libdir}/libespeak.a
+mv %{buildroot}/%{_includedir}/espeaksrc/ %{buildroot}/%{_includedir}/espeak/
+
 
 %files
 %doc ReadMe *.txt docs
@@ -87,6 +89,6 @@ rm -f %{buildroot}/%{_libdir}/libespeak.a
 %{_libdir}/libespeak.so.%{major}*
 
 %files -n %{devname}
-%{_includedir}/%{name}src
+%{_includedir}/%{name}
 %{_libdir}/libespeak.so
 
