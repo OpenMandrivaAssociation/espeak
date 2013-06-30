@@ -78,6 +78,10 @@ install -m 644 -D %{SOURCE1} %{buildroot}%{_mandir}/man1/%{name}.1
 rm -f %{buildroot}/%{_libdir}/libespeak.a
 mv %{buildroot}/%{_includedir}/espeaksrc/ %{buildroot}/%{_includedir}/espeak/
 
+%pre
+# some dirs for languages changed to files, so remove old dirs and files
+[ $1 -gt 1 -a -d /usr/share/espeak-data/voices ] && \
+rm -rf /usr/share/espeak-data/voices || :
 
 %files
 %doc ReadMe *.txt docs
