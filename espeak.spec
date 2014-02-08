@@ -6,7 +6,7 @@
 Summary:	Text to speech synthesis engine
 Name:		espeak
 Version:	1.47.07
-Release:	6
+Release:	7
 License:	GPLv3+
 Group:		Sound
 Url:		http://espeak.sourceforge.net/
