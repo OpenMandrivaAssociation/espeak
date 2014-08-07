@@ -64,7 +64,7 @@ unzip %{SOURCE4}
 
 %build
 cd src
-%make LDFLAGS="%{?ldflags}"
+%make LDFLAGS="%{?ldflags}" CC=%{__cc} CXX=%{__cxx}
 
 %install
 %makeinstall_std -C src \
