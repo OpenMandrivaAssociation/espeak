@@ -1,7 +1,6 @@
 sources:
-  espeak-1.46.02-source.zip: 221e04faeaab04973c4fa19680633f7385198459
-  espeak-1.47.07-source.zip: 4728b28dfe82f5385705f8b4ef37c33fca5bf25f
-  espeak-1.47.11-source.zip: c9d12c8f58aaac467fdde4a101204a0a68d2d16f
-  ru_dict-46.zip: 522599bf353181561f39e21ced9272f0159e2d67
-  zh_dict-46.zip: 6f92d3bdecca319365acd8b7320b4e8ff24d0739
-  zhy_dict-46.zip: 89f4a2a2d80c4f47a7304ca3c094316d1ff80a2d
+  espeak-1.48.04-source.zip: b22c0361885d05e61d98ecedca0a4926ea2fb2ad
+  ru_dict-48.zip: a1271effdb9d25866054bb7d17f0687db8e4949a
+  ru_listx.zip: 59161c57f65d12a7e707328f0891b09b8d2b54fa
+  zh_listx.zip: 5b9a37994c136220059ffe0251a897fe65b3dbf2
+  zhy_list.zip: 8213d3c546aaf1203f3d68230bd1431e30707cc5
