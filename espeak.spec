@@ -70,8 +70,9 @@ unzip %{S:5}
 %build
 TOPDIR="`pwd`"
 cd src
-%make LDFLAGS="%{?ldflags}" CC=%{__cc} CXX=%{__cxx}
+%make LDFLAGS="%{?ldflags}" CXXFLAGS="%{optflags}" CC=%{__cc} CXX=%{__cxx}
 cd ../dictsource
+export LD_LIBRARY_PATH="$TOPDIR/src"
 export ESPEAK_DATA_PATH="$TOPDIR"
 ../src/espeak --compile=ru
 ../src/espeak --compile=zh
