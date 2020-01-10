@@ -53,7 +53,7 @@ This package contains the development files for %{name}.
 
 %prep
 %setup -qn %{name}-%{version}-source
-%apply_patches
+%autopatch -p1
 chmod 644 ReadMe *.txt
 rm -f src/portaudio.h
 rm -f espeak-data/ru_dict
