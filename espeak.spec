@@ -1,12 +1,11 @@
 %define major	1
 %define libname	%mklibname %{name} %major
 %define devname	%mklibname -d %{name}
-%define	debug_package	%nil
 
 Summary:	Text to speech synthesis engine
 Name:		espeak
 Version:	1.48.04
-Release:	1
+Release:	2
 License:	GPLv3+
 Group:		Sound
 Url:		http://espeak.sourceforge.net/
@@ -68,9 +67,9 @@ unzip %{S:4}
 unzip %{S:5}
 
 %build
-TOPDIR="`pwd`"
+TOPDIR="$(pwd)"
 cd src
-%make LDFLAGS="%{?ldflags}" CXXFLAGS="%{optflags}" CC=%{__cc} CXX=%{__cxx}
+%make_build LDFLAGS="%{build_ldflags}" CXXFLAGS="%{optflags}" CC=%{__cc} CXX=%{__cxx}
 cd ../dictsource
 export LD_LIBRARY_PATH="$TOPDIR/src"
 export ESPEAK_DATA_PATH="$TOPDIR"
@@ -79,7 +78,7 @@ export ESPEAK_DATA_PATH="$TOPDIR"
 ../src/espeak --compile=zh-yue
 
 %install
-%makeinstall_std -C src \
+%make_install -C src \
 	BINDIR=%{_bindir} \
 	INCDIR=%{_includedir}/%{name}src \
 	LIBDIR=%{_libdir} \
@@ -107,4 +106,3 @@ rm -rf /usr/share/espeak-data/voices || :
 %files -n %{devname}
 %{_includedir}/%{name}
 %{_libdir}/libespeak.so
-
