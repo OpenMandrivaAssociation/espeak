@@ -8,7 +8,7 @@ Version:	1.48.04
 Release:	3
 License:	GPLv3+
 Group:		Sound
-Url:		http://espeak.sourceforge.net/
+Url:		https://espeak.sourceforge.net/
 Source0:	http://sourceforge.net/projects/espeak/files/espeak/espeak-%(echo %{version}|cut -d. -f1-2)/espeak-%{version}-source.zip
 Source1:	espeak.1
 Source2:	http://espeak.sourceforge.net/data/ru_dict-48.zip
